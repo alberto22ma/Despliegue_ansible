@@ -17,9 +17,9 @@
         host: '%'
 
     - name: configuracion postgres
-      copy:
-        src: templates/50-server.cnf
-        dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+      copy: 
+        src: templates/postgresql.conf.sample
+        dest: /etc/postgresql/9.6/main/postgresql.conf
 
     - name:  
       copy: 
