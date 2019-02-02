@@ -1,0 +1,27 @@
+---
+- hosts: nodo1
+  become: yes
+  tasks:
+    - name: Instalar postgresql
+      apt: name={{ item }} state=installed update_cache=yes
+      with_items:
+        - postgresql
+	- postgresql-contrib
+        - postgresql-client 
+
+    - name: crear usuario
+      postgres_user:
+        name: drupal
+        password: drupal
+        priv: '*.*:ALL'
+        host: '%'
+
+    - name: configuracion postgres
+      copy:
+        src: templates/50-server.cnf
+        dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+
+    - name: copiar fichero wordpress.sql
+      copy: 
+        src: templates/wordpress.sql 
+dest: /tmp
