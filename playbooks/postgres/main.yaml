@@ -13,15 +13,13 @@
       postgres_user:
         name: drupal
         password: drupal
-        priv: '*.*:ALL'
-        host: '%'
+        priv: 'ALL'
+        expires: infinity
+  handlers:
+    - name: Reiniciar SGBD PostgreSQL
+      become: yes
+      service:
+    	name: postgresql
+	state: restarted
 
-    - name: configuracion postgres
-      copy: 
-        src: templates/postgresql.conf.sample
-        dest: /etc/postgresql/9.6/main/postgresql.conf
-
-    - name:  
-      copy: 
-        src: templates/
 dest: /tmp
