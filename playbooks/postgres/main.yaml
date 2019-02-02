@@ -6,7 +6,7 @@
       apt: name={{ item }} state=installed update_cache=yes
       with_items:
         - postgresql
-	- postgresql-contrib
+        - postgresql-contrib
         - postgresql-client 
 
     - name: crear usuario
@@ -19,7 +19,7 @@
     - name: Reiniciar SGBD PostgreSQL
       become: yes
       service:
-    	name: postgresql
-	state: restarted
+        name: postgresql
+        state: restarted
 
 dest: /tmp
