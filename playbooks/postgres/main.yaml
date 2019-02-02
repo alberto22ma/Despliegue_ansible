@@ -21,7 +21,7 @@
         src: templates/50-server.cnf
         dest: /etc/mysql/mariadb.conf.d/50-server.cnf
 
-    - name: copiar fichero wordpress.sql
+    - name:  
       copy: 
-        src: templates/wordpress.sql 
+        src: templates/
 dest: /tmp
