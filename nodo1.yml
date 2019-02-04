@@ -1,6 +1,0 @@
-
-- hosts: nodo1
-
-  roles:
-    - postgresql
-    - bind9
