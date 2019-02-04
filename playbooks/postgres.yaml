@@ -1,0 +1,22 @@
+---
+ hosts: 10.0.0.5
+- name: configuracion de postgres
+  become: yes
+  tasks:
+    - name: Instalar postgresql
+      apt: name={{ item }} state=installed update_cache=yes
+      with_items:
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+        - python-psycopg2
+   
+      vars:
+       dbname: drupaldb
+       dbuser: drupal
+       dbpassword: drupal
+       ansible_ssh_pipelining: true
+
+      tasks:
+         postgresql_db: name={{dbname}}
+         postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL

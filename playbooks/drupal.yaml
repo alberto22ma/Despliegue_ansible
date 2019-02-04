@@ -1,0 +1,22 @@
+---
+ hosts: 10.0.0.5
+- name: configuracion drupal
+  become: yes
+  tasks:
+  - name: Drush
+    get_url:
+      url: https://github.com/drush-ops/drush/releases/download/8.1.17/drush.phar
+      dest: /usr/local/bin/drush
+      mode: 0755
+  - name: Instalacion
+    command: >
+      drush si standard -y
+      --site-name="Drupal_Ansible"
+      --account-name="drupal"
+      --account-pass="drupal"
+      --db-url=pgsql://drupal_user:drupal@10.0.0.5/drupaldb 
+      -r /var/www/html/drupal-8.6.7 -y
+  - name: Deshabilir los css
+    command: drush config-set system.performance css.preprocess 0 -r /var/www/html/drupal-8.6.7 -y
+  - name: Deshabilitar los js
+    command: drush config-set system.performance js.preprocess 0 -r /var/www/html/drupal-8.6.7 -y

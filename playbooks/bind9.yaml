@@ -1,0 +1,42 @@
+---
+ hosts: 10.0.0.5
+- name: configuracion bind9
+  become: yes
+  tasks:
+    - name: Instalar bind9
+      apt: name=bind9 update_cache=yes
+
+    - name: Cofiguracion bind9
+      copy:      
+        src: configuraciones/bind9/templates/named.conf.local
+        dest: /etc/bind/named.conf.local
+
+    - name: Configurando zona directa
+      copy:
+        src: configuraciones/bind9/zonas/db.example.com
+        dest: /var/cache/bind/db.example.com
+
+    - name: Configurando zona inversa
+      copy:
+        src: configuraciones/bind9/zonas/db.0.0.10
+        dest: /var/cache/bind/db.0.0.10
+
+    - name: Configurando fichero named.conf.local
+      copy: 
+        src: configuraciones/bind9/templates/zones.rcf1918
+        dest: /etc/bind/zones.rcf1918
+
+    - name: configuracion usuario y grupo
+      file:
+        path: /var/cache/bind
+        owner: bind
+        group: bind
+      with_items:
+        - db.example.com
+        - db.0.0.10
+      notify:
+        - restart bind 
+
+  handlers:
+    - name: reinicio bind9
+      service: name=bind9 state=restarted

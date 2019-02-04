@@ -1,0 +1,35 @@
+---
+ hosts: 10.0.0.6
+- name: configuracion apache
+  become: yes
+  tasks:
+  - name: Instalar Apache y fpm-php
+    apt: pkg={{ item }}
+    with_items:
+      - apache2
+      - apache2-utils
+      - postgresql-client
+      - php7.0-fpm
+      - php-pgsql
+      - php7.0-dom
+      - php7.0-gd
+      - php7.0-xml
+      - php7.0-mbstring
+  - unzip
+
+  - name: configurar virtualhost
+    copy: 
+      src: configuraciones/apache2/apachedrupal.conf
+      dest: /etc/apache2/sites-available/drupal.conf
+  - name: deshabilitar virtualhost por defecto
+    command: a2dissite 000-default.conf
+  - name: habilitar nuestro sitio
+    command: a2ensite drupal.conf
+    notify:
+      - reinicio apache 
+
+  handlers:
+    - name: reiniciar apache
+service: name=apache2 state=restarted
+
+
