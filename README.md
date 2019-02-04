@@ -16,5 +16,17 @@ https://github.com/alberto22ma/Despliegue_ansible
 Habilitamos el entorno virtual:
 
 cd Despliegue_ansible 
+
 virtualenv venv
+
 source venv/bin/activate
+
+
+Instalamos ansible
+
+pip install ansible
+
+levantamos las maquinas:
+
+vagrant up --provision
+
