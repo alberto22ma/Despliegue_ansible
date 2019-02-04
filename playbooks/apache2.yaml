@@ -15,7 +15,7 @@
       - php7.0-gd
       - php7.0-xml
       - php7.0-mbstring
-  - unzip
+      - unzip
 
   - name: configurar virtualhost
     copy: 
