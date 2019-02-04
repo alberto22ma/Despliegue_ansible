@@ -21,14 +21,16 @@
      become: yes
      service:
        name: apache2
-     state: started
+       state: started
 
   - name: configurar virtualhost
     copy: 
       src: configuraciones/apache2/apachedrupal.conf
       dest: /etc/apache2/sites-available/drupal.conf
+
   - name: deshabilitar virtualhost por defecto
     command: a2dissite 000-default.conf
+
   - name: habilitar nuestro sitio
     command: a2ensite drupal.conf
     notify:

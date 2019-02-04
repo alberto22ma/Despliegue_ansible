@@ -11,10 +11,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		virtualbox__intnet: "redinterna"
 	nodo1.vm.box_check_update = false
 	
-	#Ansible
-#	nodo1.vm.provision "ansible" do |ansible|
-#		ansible.playbook = "nodo1.yml"
-#	end
   end
 
   config.vm.define :nodo2 do |nodo2|
@@ -22,9 +18,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	nodo2.vm.hostname = "nodo2"
 	nodo2.vm.network "private_network", ip:"10.0.0.6",
 		virtualbox__intnet: "redinterna"
-	#Ansible
-#	nodo2.vm.provision "ansible" do |ansible|
-#		ansible.playbook = "nodo2.yml"
-#	end
   end
 end

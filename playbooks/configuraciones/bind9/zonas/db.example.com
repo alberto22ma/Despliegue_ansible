@@ -16,4 +16,4 @@ $ORIGIN	example.com.
 
 nodo1		IN	A	10.0.0.5
 nodo2		IN	A	10.0.0.6
-drupal		IN	CNAME	nodo2.example.com.
+drupal		IN	CNAME	nodo2
