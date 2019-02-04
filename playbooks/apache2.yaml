@@ -3,21 +3,7 @@
 - name: configuracion apache
   become: yes
   tasks:
-  - name: Instalar Apache y fpm-php
-    apt: pkg={{ item }}
-    with_items:
-      - apache2
-      - apache2-utils
-      - postgresql-client
-      - php7.0-fpm
-      - php-pgsql
-      - php7.0-dom
-      - php7.0-gd
-      - php7.0-xml
-      - php7.0-mbstring
-      - unzip
-
-   - name: Start apache
+  - name: Start apache
      become: yes
      service:
        name: apache2

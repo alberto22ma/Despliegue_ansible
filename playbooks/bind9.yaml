@@ -2,9 +2,7 @@
  hosts: 10.0.0.5
 - name: configuracion bind9
   become: yes
-  apt:
-      name: bind9
-      apt: name=bind9 update_cache=yes
+  tasks:
 
     - name: Cofiguracion bind9
       copy:      
@@ -21,7 +19,7 @@
         src: configuraciones/bind9/zonas/db.0.0.10
         dest: /var/cache/bind/db.0.0.10
 
-    - name: Configurando fichero named.conf.local
+    - name: Configurando fichero zones
       copy: 
         src: configuraciones/bind9/templates/zones.rcf1918
         dest: /etc/bind/zones.rcf1918

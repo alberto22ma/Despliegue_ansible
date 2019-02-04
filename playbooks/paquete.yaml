@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Actualizar paquetes
+    apt: update_cache=yes
+
+  - name: paquetes para nodo1
+    hosts: 10.0.0.5
+    become: yes
+    tasks:
+    - name: PostgresSQL y Bind9
+      apt: pkg={{ item }}
+      with_items:
+       - postgresql
+       - libpq-dev
+       - python-psycopg2
+       - bind9
+
+   - name: paquetes para nodo2
+     hosts: 10.0.0.6
+     become: yes
+     tasks:
+   
+   - name: Apache y Fpm-php
+     apt: pkg={{ item }}
+     with_items:
+      - apache2
+      - apache2-utils
+      - postgresql-client
+      - php7.0-fpm
+      - php-pgsql
+      - php7.0-dom
+      - php7.0-gd
+      - php7.0-xml
+      - php7.0-mbstring
+      - unzip
+

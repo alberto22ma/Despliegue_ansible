@@ -22,4 +22,5 @@
       - pg_hba.conf
   
   - name: restart postgres
-service: name=postgresql state=restarted
+    service: name=postgresql state=restarted
+ 
