@@ -17,6 +17,12 @@
       - php7.0-mbstring
       - unzip
 
+   - name: Start apache
+     become: yes
+     service:
+       name: apache2
+     state: started
+
   - name: configurar virtualhost
     copy: 
       src: configuraciones/apache2/apachedrupal.conf

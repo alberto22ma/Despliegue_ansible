@@ -20,3 +20,9 @@
       tasks:
          postgresql_db: name={{dbname}}
          postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
+
+- name: restart postgresql
+  become: yes
+  service:
+    name: postgresql
+    state: restarted

@@ -2,8 +2,8 @@
  hosts: 10.0.0.5
 - name: configuracion bind9
   become: yes
-  tasks:
-    - name: Instalar bind9
+  apt:
+      name: bind9
       apt: name=bind9 update_cache=yes
 
     - name: Cofiguracion bind9
