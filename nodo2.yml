@@ -1,0 +1,6 @@
+- hosts: nodo2
+
+  roles:
+    - apache2
+    - php
+    - drupal
