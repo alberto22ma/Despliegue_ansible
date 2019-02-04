@@ -12,3 +12,9 @@ El cliente simplemente levantará el escenario y configurará como DNS primario 
 Clonar el repositorio:
 
 https://github.com/alberto22ma/Despliegue_ansible
+
+Habilitamos el entorno virtual:
+
+cd Despliegue_ansible 
+virtualenv venv
+source venv/bin/activate
