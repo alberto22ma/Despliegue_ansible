@@ -1,29 +1,37 @@
 ---
- hosts: 10.0.0.6
-- name: configuracion apache
-  become: yes
-  tasks:
-  - name: Start apache
-     become: yes
-     service:
-       name: apache2
-       state: started
+- name: Install apache2
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - apache2
+    - libapache2-mod-php7.0
+    - php7.0
+    - php7.0-pgsql
+    - php7.0-xml
+    - php7.0-mbstring
+    - php7.0-gd
+    - postgresql-client
 
-  - name: configurar virtualhost
-    copy: 
-      src: configuraciones/apache2/apachedrupal.conf
-      dest: /etc/apache2/sites-available/drupal.conf
+- name: Configuracion virtualhost
+  copy:
+    src: configuraciones/apache2/apachedrupal.conf
+    dest: /etc/apache2/sites-available/drupal.conf 
+    owner: root
+    group: root
+    mode: 0644
 
-  - name: deshabilitar virtualhost por defecto
-    command: a2dissite 000-default.conf
+- name: habilitar virtualhost
+  file:
+    src: configuraciones/apache2/apachedrupal.conf
+    dest: /etc/apache2/sites-enabled/drupal.conf
+    owner: root
+    group: root
+    state: link
 
-  - name: habilitar nuestro sitio
-    command: a2ensite drupal.conf
-    notify:
-      - reinicio apache 
-
-  handlers:
-    - name: reiniciar apache
-service: name=apache2 state=restarted
-
-
+- name: deshabilitar default virtualhost
+  file:
+    path: /etc/apache2/sites-enabled/000-default.conf
+    state: absent
+  notify:
+- restart apache2

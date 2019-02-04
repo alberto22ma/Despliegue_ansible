@@ -1,40 +1,39 @@
 ---
- hosts: 10.0.0.5
-- name: configuracion bind9
-  become: yes
-  tasks:
+- name: Instalar bind9
+  apt:
+    name: bind9
+    state: latest
 
-    - name: Cofiguracion bind9
-      copy:      
-        src: configuraciones/bind9/templates/named.conf.local
-        dest: /etc/bind/named.conf.local
+- name: conf named.conf.local
+  copy:
+    src: configuraciones/bind9/templates/named.conf.local
+    dest: /etc/bind/named.conf.local
+    owner: bind
+    group: bind
+    mode: 0644
 
-    - name: Configurando zona directa
-      copy:
-        src: configuraciones/bind9/zonas/db.example.com
-        dest: /var/cache/bind/db.example.com
+- name: conf zone
+  copy:
+    src: configuraciones/bind9/templates/zones.rfc1918
+    dest: /etc/bind/zones.rfc1918
+    owner: bind
+    group: bind
+    mode: 0644
 
-    - name: Configurando zona inversa
-      copy:
-        src: configuraciones/bind9/zonas/db.0.0.10
-        dest: /var/cache/bind/db.0.0.10
+- name: añadir zona db.example
+  copy:
+    src: configuraciones/bind9/zonas/db.example.com
+    dest: /var/cache/bind/db.example.com
+    owner: bind
+    group: bind
+    mode: 0644
 
-    - name: Configurando fichero zones
-      copy: 
-        src: configuraciones/bind9/templates/zones.rcf1918
-        dest: /etc/bind/zones.rcf1918
-
-    - name: configuracion usuario y grupo
-      file:
-        path: /var/cache/bind
-        owner: bind
-        group: bind
-      with_items:
-        - db.example.com
-        - db.0.0.10
-      notify:
-        - restart bind 
-
-  handlers:
-    - name: reinicio bind9
-      service: name=bind9 state=restarted
+- name: aañdir zona file db.0.0.10
+  copy:
+    src: configuraciones/bind9/zonas/db.0.0.10
+    dest: /var/cache/bind/db.0.0.10
+    owner: bind
+    group: bind
+    mode: 0644
+  notify:
+- restart bind9

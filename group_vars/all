@@ -1,0 +1,11 @@
+---
+# Domain
+domain: example.org
+
+# Server name
+server_name: drupal.example.org
+
+# Database data
+dbname: drupaldb
+dbuser: drupal
+dbpasswd: drupal
