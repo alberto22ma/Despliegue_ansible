@@ -1,43 +1,53 @@
 ---
-- name: Descargar Drupal
-  unarchive:
-    src: https://www.drupal.org/download-latest/tar.gz
-    dest: /var/www/
-    remote_src: yes
-
-- name: crear sites/default/files
-  file:
-    path: /var/www/drupal/sites/default/files
-    state: directory
-    owner: root
-    group: root
-    mode: 0666
-
-- name: configuracion settings.php 
-  copy:
-    src: /var/www/drupal/sites/default/default.settings.php
-    dest: /var/www/drupal/sites/default/settings.php 
-    remote_src: yes
-    owner: root
-    group: root
-    mode: 0666
-
-- name: Descarga Drush  
+- name: Instalar y configurar Drush
   get_url:
-    url: https://github.com/drush-ops/drush/releases/download/8.1.18/drush.phar
-    dest: /usr/local/bin/drush
-    owner: root
-    group: root
-    mode: 0755
+   url: https://github.com/drush-ops/drush/releases/download/8.1.17/drush.phar
+   dest: /home/vagrant/drush
+  
+- name: mover configuracion Drush
+  command: mv /home/vagrant/drush /usr/local/bin/drush
 
-- name: Cambio al directorio /var/www/drupal
-  shell: cd /var/www/drupal
+- name: user drush
+  file:
+   path: /usr/local/bin/drush
+   mode: 0755
+   owner: www-data
+   group: www-data
 
-- name: Install Drupal Drush
-  shell: cd /var/www/drupal && drush site-install standard -y --site-name="Despliegue Drupal con Ansible" --account-name="drupal" --account-pass="drupal" --db-url=pgsql://drupal:drupal@172.16.0.5/drupaldb -y
+- name: Installing zip
+  apt: 
+   name: unzip 
+   state: latest
 
-- name: deshabilitar ficheros CSS y JS
-  shell: cd /var/www/drupal && drush -y config-set system.performance css.preprocess 0 && drush -y config-set system.performance js.preprocess 0
+- name: Descarga Drupal
+  get_url:
+    url: https://ftp.drupal.org/files/projects/drupal-8.6.7.zip
+    dest: /home/vagrant/drupal-8.6.7.zip
+  
+- name: conf dir drupal
+  unarchive:
+    src: /home/vagrant/drupal-8.6.7.zip
+    dest: /var/www/html
+    remote_src: yes
+    owner: www-data
+    group: www-data
+    mode : 0755
+  
+- name: conf instalacion Drupal
+  copy:
+    src: roles/apache2/files/etc/apache2/sites-available/apachedrupal.conf  
+    dest: /etc/apache2/sites-available/drupal.conf
+    
+- name: Descarga y conf drupal
+  command: a2dissite 000-default.conf
+  command: a2enmod proxy_fcgi setenvif
+  command: a2enconf php7.0-fpm   
+  command: a2ensite drupal.conf
+  command:
+    drush si standard -y
+    --account-name="drupal"
+    --account-pass="drupal"
+    --db-url=pgsql://drupal:drupal@172.16.0.5/drupaldb
+    -r /var/www/html/drupal-8.6.7 -y
   notify:
   - restart apache2
-
