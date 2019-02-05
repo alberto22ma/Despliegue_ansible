@@ -8,8 +8,8 @@ $TTL    5
                               5 )       ; Negative Cache TTL
 ;
 @               IN              NS      nodo1
-nodo1           IN              A       10.0.0.5
-nodo2           IN              A       10.0.0.6
+nodo1           IN              A       172.16.0.5
+nodo2           IN              A       172.16.0.6
 drupal          IN              CNAME   nodo2
 postgres        IN              CNAME   nodo1
 
