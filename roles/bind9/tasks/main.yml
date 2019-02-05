@@ -6,7 +6,7 @@
 
 - name: conf named.conf.local
   copy:
-    src: files/bind/named.conf.local
+    src: etc/bind9/named.conf.local
     dest: /etc/bind/named.conf.local
     owner: bind
     group: bind
@@ -14,7 +14,7 @@
 
 - name: conf zones
   copy:
-    src: files/bind/zones.rfc1918
+    src: etc/bind9/zones.rfc1918
     dest: /etc/bind/zones.rfc1918
     owner: bind
     group: bind
@@ -22,7 +22,7 @@
 
 - name: añadir zonas db.example
   copy:
-    src: files/conf/db.example
+    src: var/cache/bind9/db.example
     dest: /var/cache/bind/db.example
     owner: bind
     group: bind
@@ -30,7 +30,7 @@
 
 - name: añadir zona db.10.0.0
   copy:
-    src: files/conf/db.10.0.0
+    src: var/cache/bind9/db.10.0.0
     dest: /var/cache/bind/db.10.0.0
     owner: bind
     group: bind

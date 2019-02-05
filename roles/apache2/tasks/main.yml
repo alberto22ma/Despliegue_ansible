@@ -15,7 +15,7 @@
 
 - name: conf virtualhost
   copy:
-    src: sites/apachedrupal.conf
+    src: etc/apache2/sites-available/apachedrupal.conf
     dest: /etc/apache2/sites-available/drupal.conf 
     owner: root
     group: root
@@ -23,7 +23,7 @@
 
 - name: Activar virtualhost
   file:
-    src: sites/apachedrupal.conf
+    src: /etc/apache2/sites-available/drupal.conf
     dest: /etc/apache2/sites-enabled/drupal.conf
     owner: root
     group: root

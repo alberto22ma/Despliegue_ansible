@@ -1,6 +1,6 @@
 ---
 # Domain
-domain: example.org
+domain: example.com
 
 # Server name
 server_name: drupal.example.org

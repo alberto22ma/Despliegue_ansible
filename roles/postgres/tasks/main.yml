@@ -31,7 +31,7 @@
 
 - name: Conf postgresql.conf
   copy:
-    src: files/postgres/postgresql.conf
+    src: etc/postgresql/9.6/main/postgresql.conf
     dest: /etc/postgresql/9.6/main/postgresql.conf
     owner: postgres
     group: postgres
@@ -39,7 +39,7 @@
 
 - name: Conf pg_hba.conf
   copy:
-    src: files/postgres/pg_hba.conf
+    src: etc/postgresql/9.6/main/pg_hba.conf
     dest: /etc/postgresql/9.6/main/pg_hba.conf
     owner: postgres
     group: postgres
