@@ -14,3 +14,5 @@ Clonar el repositorio:
 https://github.com/alberto22ma/Despliegue_ansible
 
 Levantos las maquinas con "vagrant up"
+
+Por ultimo, ejecutamos: ansible-playbook site.yml
