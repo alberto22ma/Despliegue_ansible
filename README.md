@@ -15,8 +15,10 @@ https://github.com/alberto22ma/Despliegue_ansible
 
 Habilitamos el entorno virtual:
 
-> virtualenv venv
-> source venv/bin/activate
+```sh
+virtualenv venv
+source venv/bin/activate
+```
 
 Instalamos ansible: pip install ansible
 
