@@ -11,7 +11,7 @@ zone "example.com" {
     file "db.example";
 };
 
-zone "0.0.10.in-addr.arpa" {
+zone "0.16.172.in-addr.arpa" {
     type master;
-    file "db.10.0.0";
+    file "db.172.16.0";
 };
