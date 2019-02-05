@@ -1,9 +1,0 @@
-zone "example.com" {
-type master;
-file "/var/cache/bind/db.example.com";
-};
-
-zone "0.0.10.in-addr.arpa" {
-type master;
-file "/var/cache/bind/db.0.0.10";
-};
