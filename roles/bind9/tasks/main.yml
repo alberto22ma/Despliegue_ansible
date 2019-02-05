@@ -28,10 +28,10 @@
     group: bind
     mode: 0644
 
-- name: añadir zona db.10.0.0
+- name: añadir zona db.172.0.16
   copy:
-    src: var/cache/bind9/db.10.0.0
-    dest: /var/cache/bind/db.10.0.0
+    src: var/cache/bind9/db.172.16.0
+    dest: /var/cache/bind/db.172.16.0
     owner: bind
     group: bind
     mode: 0644
