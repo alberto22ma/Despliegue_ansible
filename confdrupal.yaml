@@ -1,7 +1,0 @@
-- include: playbooks/paquete.yaml
-- include: playbooks/apache2.yaml
-- include: playbooks/bind9.yaml
-- include: playbooks/postgres.yaml
-- include: playbooks/acceso_postgres.yaml
-- include: playbooks/instalacion_drupal.yaml
-- include: playbooks/drupal.yaml
