@@ -13,6 +13,11 @@ Clonar el repositorio:
 
 https://github.com/alberto22ma/Despliegue_ansible
 
-Levantos las maquinas con "vagrant up"
+Habilitamos el entorno virtual:
 
-Por ultimo, ejecutamos: ansible-playbook site.yml
+virtualenv venv
+source venv/bin/activate
+
+Instalamos ansible: pip install ansible
+
+Levantos las maquinas: vagrant up --provision
