@@ -1,5 +1,5 @@
 $TTL    5
-@       IN      SOA     nodo1.example.com. nodo1.example.com. (
+@       IN      SOA     example.com. nodo1.example.com. (
                               1         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
@@ -10,4 +10,4 @@ $TTL    5
 $ORIGIN 0.0.10.in-addr.arpa.
 5      IN      PTR     nodo1.example.com.
 6      IN      PTR     nodo2.example.com.
-7      IN      PTR     drupal.example.org.
+6      IN      PTR     drupal.example.org.
