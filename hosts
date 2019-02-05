@@ -1,5 +1,3 @@
-[nodo1]
-10.0.0.5 ansible_ssh_private_key_file=.vagrant/machines/nodo1/virtualbox/private_key
-
-[nodo2]
-10.0.0.6 ansible_ssh_private_key_file=.vagrant/machines/nodo2/virtualbox/private_key
+[hosts]
+nodo1 ansible_host=172.16.0.5 ansible_user=vagrant ansible_become=true
+nodo2 ansible_host=172.16.0.6 ansible_user=vagrant ansible_become=true

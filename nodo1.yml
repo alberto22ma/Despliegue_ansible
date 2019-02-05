@@ -1,0 +1,7 @@
+
+- hosts: nodo1
+
+  roles:
+    - common
+    - postgres
+    - bind9

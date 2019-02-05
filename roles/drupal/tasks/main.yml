@@ -5,9 +5,6 @@
     dest: /var/www/
     remote_src: yes
 
-- name: renombrar directory
-  shell: mv /var/www/drupal* /var/www/drupal
-
 - name: crear sites/default/files
   file:
     path: /var/www/drupal/sites/default/files
@@ -25,7 +22,7 @@
     group: root
     mode: 0666
 
-- name: Descargar Drush  
+- name: Descarga Drush  
   get_url:
     url: https://github.com/drush-ops/drush/releases/download/8.1.18/drush.phar
     dest: /usr/local/bin/drush
@@ -33,13 +30,14 @@
     group: root
     mode: 0755
 
-- name: cambiar directorio /var/www/drupal
+- name: Cambio al directorio /var/www/drupal
   shell: cd /var/www/drupal
 
 - name: Install Drupal Drush
-  shell: cd /var/www/drupal && drush site-install standard -y --site-name="Despliegue de Drupal con Ansible" --account-name="admin" --account-pass="admin" --db-url=pgsql://admin:admin@10.0.0.10/drupal -y
+  shell: cd /var/www/drupal && drush site-install standard -y --site-name="Despliegue Drupal con Ansible" --account-name="drupal" --account-pass="drupal" --db-url=pgsql://drupal:drupal@10.0.0.5/drupaldb -y
 
-- name: Deshabilitar CSS y JS 
+- name: deshabilitar ficheros CSS y JS
   shell: cd /var/www/drupal && drush -y config-set system.performance css.preprocess 0 && drush -y config-set system.performance js.preprocess 0
   notify:
   - restart apache2
+
