@@ -7,7 +7,7 @@ $TTL    5
                           86400 )       ; Negative Cache TTL
 ;
 @       IN      NS      nodo1.example.com.
-$ORIGIN 0.0.10.in-addr.arpa.
+$ORIGIN 0.16.172.in-addr.arpa.
 5      IN      PTR     nodo1
 6      IN      PTR     nodo2
 6      IN      PTR     drupal.example.org.
