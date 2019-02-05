@@ -1,0 +1,48 @@
+---
+- name: Install PostgreSQL
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - postgresql
+    - postgresql-contrib
+    - python-psycopg2
+
+- name: Aañadir base datos drupal
+  become: yes
+  become_user: postgres
+  vars:
+    ansible_ssh_pipelining: true
+  postgresql_db:
+    name: "{{ db_name }}"
+    encoding: UTF-8
+
+- name: privilegios usuario base datos
+  become: yes
+  become_user: postgres
+  vars:
+    ansible_ssh_pipelining: true
+  postgresql_user:
+    db: "{{ db_name }}"
+    name: "{{ db_user }}"
+    password: "{{ db_passwd }}"
+    priv: "ALL"
+    expires: infinity
+
+- name: Conf postgresql.conf
+  copy:
+    src: files/postgres/postgresql.conf
+    dest: /etc/postgresql/9.6/main/postgresql.conf
+    owner: postgres
+    group: postgres
+    mode: 0644
+
+- name: Conf pg_hba.conf
+  copy:
+    src: files/postgres/pg_hba.conf
+    dest: /etc/postgresql/9.6/main/pg_hba.conf
+    owner: postgres
+    group: postgres
+    mode: 0640
+  notify:
+    - restart postgresql

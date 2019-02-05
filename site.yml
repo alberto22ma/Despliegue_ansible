@@ -2,19 +2,19 @@
 - name: Install Drupal with Apache, mod-php, PostgreSQL and bind9 as DNS
   hosts: all
   become: yes
-  playbooks:
+  roles:
     - common
 
 - hosts: nodo1
   gather_facts: no
   become: yes
-  playbooks:
+  roles:
     - postgres
     - bind9
 
 - hosts: nodo2
   gather_facts: no
   become: yes
-  playbooks:
-    - apache
+  roles:
+    - apache2
     - drupal
