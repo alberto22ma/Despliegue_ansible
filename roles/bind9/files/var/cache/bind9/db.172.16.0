@@ -8,6 +8,6 @@ $TTL    5
 ;
 @       IN      NS      nodo1.example.com.
 $ORIGIN 0.0.10.in-addr.arpa.
-5      IN      PTR     nodo1.example.com.
-6      IN      PTR     nodo2.example.com.
+5      IN      PTR     nodo1
+6      IN      PTR     nodo2
 6      IN      PTR     drupal.example.org.
