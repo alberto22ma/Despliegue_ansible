@@ -14,7 +14,7 @@
   vars:
     ansible_ssh_pipelining: true
   postgresql_db:
-    name: "{{ db_name }}"
+    name: "{{ dbname }}"
     encoding: UTF-8
 
 - name: privilegios usuario base datos
@@ -23,9 +23,9 @@
   vars:
     ansible_ssh_pipelining: true
   postgresql_user:
-    db: "{{ db_name }}"
-    name: "{{ db_user }}"
-    password: "{{ db_passwd }}"
+    db: "{{ dbname }}"
+    name: "{{ dbuser }}"
+    password: "{{ dbpasswd }}"
     priv: "ALL"
     expires: infinity
 
